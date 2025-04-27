@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>DUT Labs – Teaching AI to Use Computers, Tools, and the World</title>
+
+<!-- 1-file quick-start styles -->
+<style>
+/* ---------- base ---------- */
+:root {
+  --bg: #ffffff;
+  --txt: #0a0a0a;
+  --accent: #2563ff;          /* electric-blue accent */
+  --accent-dark: #1e4ff5;
+  --radius: 8px;
+  --max: 1140px;              /* content width */
+  --font-main: "Inter", -apple-system, BlinkMacSystemFont, Segoe UI,
+               Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html,body { width:100%; height:100%; background:var(--bg); color:var(--txt);
+            font-family:var(--font-main); line-height:1.4; -webkit-font-smoothing:antialiased;}
+a { color:var(--accent); text-decoration:none; }
+h1,h2,h3 { font-weight:700; }
+ul { list-style:none; }
+section { padding:7rem 1.5rem; }
+.center { max-width:var(--max); margin:0 auto; }
+
+/* ---------- navbar ---------- */
+nav { position:sticky; top:0; z-index:100; background:var(--bg);
+      border-bottom:1px solid #eee; }
+nav .wrap { display:flex; justify-content:space-between; align-items:center;
+           padding:1rem 1.5rem; max-width:var(--max); margin:0 auto; }
+.logo { font-weight:700; letter-spacing:-0.02em; font-size:1.2rem; }
+
+/* ---------- hero ---------- */
+.hero { display:flex; flex-direction:column; align-items:flex-start; gap:2.5rem; }
+.hero h1 { font-size:clamp(2.5rem, 5vw + 1rem, 4.5rem); max-width:680px;
+           line-height:1.1; }
+.hero p.tag { font-size:1.25rem; margin-top:-1rem; }
+.cta-row { display:flex; gap:1rem; margin-top:1.8rem; }
+.btn {
+  padding:0.9rem 1.8rem; font-size:1rem; font-weight:600; border-radius:var(--radius);
+  transition:background .2s ease; cursor:pointer; }
+.btn.primary { color:#fff; background:var(--accent); border:none; }
+.btn.primary:hover { background:var(--accent-dark); }
+.btn.secondary { color:var(--accent); border:2px solid var(--accent); background:#fff; }
+.btn.secondary:hover { background:#f4f7ff; }
+
+/* responsive illustration */
+.hero-graphic { width:100%; max-width:420px; align-self:center; margin-top:3rem; }
+
+/* ---------- feature list ---------- */
+.features ul { display:grid; gap:1.3rem; font-size:1.05rem; }
+@media(min-width:640px){
+  .features ul { grid-template-columns:1fr 1fr; }
+}
+
+/* ---------- footer ---------- */
+footer { text-align:center; font-size:0.9rem; padding:3rem 1.5rem;
+         color:#666; border-top:1px solid #eee; }
+
+/* ---------- misc ---------- */
+@media(min-width:860px){
+  .hero { flex-direction:row; justify-content:space-between; }
+  .hero-copy { max-width:660px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ── Navbar ──────────────────────────────── -->
+<nav>
+  <div class="wrap">
+    <span class="logo">DUT Labs</span>
+    <a href="#join" class="btn secondary">Join Us</a>
+  </div>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────── -->
+<header class="center hero" id="top">
+  <div class="hero-copy">
+    <h1>Teaching AI to Use Computers, Tools, and the World.</h1>
+    <p class="tag"><strong>Data. Users. Tasks.</strong> Simple foundation—limitless potential.</p>
+
+    <div class="cta-row">
+      <a  href="#join" class="btn primary">Join the Mission</a>
+      <a  href="mailto:hello@dutlabs.ai" class="btn secondary">Get in Touch</a>
+    </div>
+  </div>
+
+  <!-- placeholder illustration (swap for a real SVG) -->
+  <svg class="hero-graphic" viewBox="0 0 400 260" width="400" height="260" fill="none">
+    <rect x="1"  y="1" width="398" height="258" rx="12" stroke="#cfd8ff" stroke-width="2"/>
+    <rect x="60" y="80" width="280" height="24" rx="6" fill="#2563ff" opacity=".22"/>
+    <rect x="60" y="120" width="220" height="24" rx="6" fill="#2563ff" opacity=".12"/>
+    <rect x="60" y="160" width="140" height="24" rx="6" fill="#2563ff" opacity=".12"/>
+    <polygon points="300,200 340,200 320,230" fill="#0a0a0a" opacity=".8"/>
+  </svg>
+</header>
+
+<!-- ── What we’re working on ────────────────── -->
+<section class="center features">
+  <h2>What We’re Working On</h2>
+  <ul>
+    <li><strong>Autonomous Computer Control  →</strong> agents that click, type & navigate real software.</li>
+    <li><strong>Task-oriented Intelligence  →</strong> multi-step workflows end-to-end, no hand-holding.</li>
+    <li><strong>User-aligned Systems  →</strong> humans express intent; agents deliver outcomes.</li>
+    <li><strong>Open-source Research  →</strong> benchmarks & datasets for the Data · Users · Task community.</li>
+  </ul>
+</section>
+
+<!-- ── Experience / team blurb ───────────────── -->
+<section class="center">
+  <h2>Backed by Experience</h2>
+  <p style="max-width:700px; margin-top:1rem; font-size:1.1rem;">
+    We’ve shipped production AI at scale, from autonomous brokerage bots to 3-D learning
+    platforms. Now we’re laser-focused on building agents that run <em>everyday software</em>
+    so humans can stay in flow.
+  </p>
+</section>
+
+<!-- ── Join us ──────────────────────────────── -->
+<section class="center" id="join">
+  <h2>Join Us</h2>
+  <p style="max-width:600px; margin:.8rem 0 2rem;">
+    Engineers, researchers, product minds—if turning academic ideas into working code
+    excites you, we’d love to talk.
+  </p>
+  <a href="https://forms.gle/your-application-form" class="btn primary">Apply Now</a>
+</section>
+
+<!-- ── Footer ───────────────────────────────── -->
+<footer>
+  DUT Labs © 2025 &nbsp;•&nbsp; Built with intent
+</footer>
+
+</body>
+</html>
