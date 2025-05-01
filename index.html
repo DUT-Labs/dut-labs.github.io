@@ -3,56 +3,78 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DUT Labs – Teaching AI to Use Computers, Tools, and the World</title>
-  <!-- 8‑pt spacing + AI cursor + D→U→T flow graphic -->
+  <title>Neo — Your On‑Device AI Assistant</title>
   <style>
-    :root{--bg:#ffffff;--txt:#0a0a0a;--accent:#2563ff;--accent-dk:#1e4ff5;--accent-lite:#f0f6ff;--radius:8px;--max:1140px;--font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--s1:.25rem;--s2:.5rem;--s3:1rem;--s4:1.5rem;--s5:2rem;--s6:3rem;--s7:4.5rem;--s8:6rem;}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased;}
-    a{text-decoration:none;}
-    h1,h2{font-weight:700;}
-    h1{font-size:clamp(2.6rem,6vw+1rem,4.4rem);line-height:1.1;margin-bottom:var(--s3);}h2{font-size:1.7rem;margin-bottom:var(--s3);}p{margin-bottom:var(--s4);max-width:70ch;font-size:1.05rem;}
-    .center{max-width:var(--max);margin-inline:auto;padding-inline:var(--s4);}nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid #eee;z-index:99;}nav .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:var(--s3);} .logo{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;color:var(--txt);} 
-    .btn{display:inline-flex;align-items:center;justify-content:center;font-size:1rem;font-weight:600;line-height:1;padding:calc(var(--s3)-.125rem) var(--s4);border-radius:var(--radius);border:2px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s;user-select:none;}
-    .btn.primary{color:#fff;background:var(--accent);} .btn.primary:hover{background:var(--accent-dk);} .btn.primary:focus-visible{outline:4px solid var(--accent-lite);} 
-    /* Hero */
-    header.hero{display:flex;flex-direction:column;gap:var(--s5);align-items:flex-start;padding-block:var(--s7);}svg.hero-graphic{width:100%;max-width:380px;align-self:center;}
-    .dut-flow{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s4);} .step{display:flex;flex-direction:column;align-items:center;font-weight:600;font-size:.9rem;color:var(--accent);} .bubble{width:60px;height:60px;border:2px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;background:var(--accent-lite);} .arrow-svg{width:26px;height:26px;fill:none;stroke:var(--txt);stroke-width:2;}
-    section.features{padding-block:var(--s7);} .features ul{display:grid;gap:var(--s3);} .features li{display:flex;gap:var(--s2);} .arrow{color:var(--accent);font-weight:700;flex-shrink:0;}
-    section.experience,section.join{padding-block:var(--s7);}footer{border-top:1px solid #eee;padding-block:var(--s6);text-align:center;font-size:.9rem;color:#666;}
-    @media(min-width:860px){header.hero{flex-direction:row;justify-content:space-between;align-items:center;} .hero-copy{max-width:640px;} .dut-flow{flex-wrap:nowrap;} .features ul{grid-template-columns:1fr 1fr;}}
-    .ai-cursor{position:fixed;left:0;top:0;width:28px;height:28px;border:2px solid var(--accent);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:transform .12s ease-out;z-index:1000;mix-blend-mode:difference;} .ai-click{position:fixed;left:0;top:0;width:12px;height:12px;border-radius:50%;background:var(--accent);pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.5);animation:clickPulse .5s forwards ease-out;mix-blend-mode:color-dodge;} @keyframes clickPulse{to{opacity:0;transform:translate(-50%,-50%) scale(2);}}
+    :root{--bg:#ffffff;--txt:#0a0a0a;--accent:#2563ff;--radius:8px;--font:"Inter",sans-serif;--s2:.5rem;--s3:1rem;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:var(--font);background:var(--bg);color:var(--txt);display:flex;flex-direction:column;min-height:100vh;}
+    nav{padding:1rem;display:flex;justify-content:space-between;align-items:center;}
+    .logo{font-weight:700;font-size:1.25rem;}
+    .btn{background:var(--accent);color:#fff;padding:0.75rem 1.5rem;border:none;border-radius:var(--radius);font-size:1rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;}
+    header{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem;}
+    h1{font-size:3rem;margin-bottom:1rem;}
+    p{font-size:1.25rem;margin-bottom:2rem;}
+    #dut-content{display:none;padding:2rem;}
+    #dut-content h2{font-size:2rem;margin-bottom:1rem;}
+    #dut-content p, #dut-content ul{font-size:1rem;line-height:1.5;margin-bottom:var(--s3);}
+    #dut-content ul{list-style:disc;padding-left:1.5rem;}
+    .dut-flow{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;margin-bottom:var(--s3);}
+    .step{display:flex;flex-direction:column;align-items:center;font-weight:600;font-size:.9rem;color:var(--accent);}
+    .bubble{width:60px;height:60px;border:2px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;background:var(--accent-light);}    
+    .arrow-svg{width:26px;height:26px;fill:none;stroke:var(--txt);stroke-width:2;}
+    footer{text-align:center;padding:1rem;font-size:0.875rem;color:#666;}
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <nav class="center"><div class="wrap"><span class="logo">DUT Labs</span><a href="https://github.com/DUT-Labs" class="btn primary" target="_blank" rel="noopener">Join Us</a></div></nav>
-
-  <!-- HERO -->
-  <header class="center hero" id="top">
-    <div class="hero-copy">
-      <h1>Teaching AI to Use Computers, Tools, and the World.</h1>
-      <p><strong>Data · Users · Tasks.</strong> Simple foundation—limitless potential.</p>
-      <!-- D U T flow visual -->
-      <div class="dut-flow" aria-label="Data to User AI to Task flow"><div class="step"><span class="bubble">Data</span><span style="margin-top:var(--s2);">Source</span></div><svg class="arrow-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M16 6l4 6-4 6"/></svg><div class="step"><span class="bubble" style="background:var(--accent);color:#fff;">AI</span><span style="margin-top:var(--s2);">Reason</span></div><svg class="arrow-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M16 6l4 6-4 6"/></svg><div class="step"><span class="bubble">Task</span><span style="margin-top:var(--s2);">Action</span></div></div>
+  <nav>
+    <span class="logo">DUT Labs</span>
+    <div>
+      <a href="#" id="dut-link" class="btn">What is DUT?</a>
+      <a href="https://github.com/DUT-Labs/neo" class="btn" target="_blank" rel="noopener">GitHub</a>
     </div>
-    <!-- SVG illustration -->
-    <svg class="hero-graphic" viewBox="0 0 360 240" role="img" aria-label="software window + cursor illustration"><rect x="20" y="30" width="320" height="180" rx="12" fill="none" stroke="#0a0a0a" stroke-width="2"/><g fill="#2563ff"><circle cx="40" cy="46" r="4"/><circle cx="55" cy="46" r="4"/><circle cx="70" cy="46" r="4"/></g><rect x="80" y="90" width="200" height="20" rx="6" fill="#2563ff" opacity="0.85"/><rect x="80" y="120" width="160" height="20" rx="6" fill="#2563ff" opacity="0.55"/><rect x="80" y="150" width="120" height="20" rx="6" fill="#2563ff" opacity="0.35"/><polygon points="240,110 270,150 250,150 255,170" fill="#0a0a0a"/><g stroke="#2563ff" stroke-width="2" fill="none" transform="translate(30,160)"><ellipse cx="0" cy="0" rx="24" ry="8"/><path d="M-24,0 v18 a24 8 0 0 0 48 0 v-18"/></g><g stroke="#2563ff" stroke-width="2" fill="none" transform="translate(310,60)"><circle cx="0" cy="0" r="16"/><circle cx="0" cy="-4" r="5"/><path d="M-9,7 a9 5 0 0 0 18 0"/></g><g stroke="#2563ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(70,210)"><circle cx="0" cy="0" r="18"/><polyline points="-6,-1 0,6 10,-8"/></g></svg>
+  </nav>
+
+  <header>
+    <h1>Neo</h1>
+    <p>Your on‑device AI assistant.</p>
+    <a href="https://fromsmash.com/Neo-Agent" class="btn" target="_blank" rel="noopener">
+      <span style="font-size:1.5rem;margin-right:0.5rem;">🍏</span>
+      Try Neo Desktop (Mac only)
+    </a>
   </header>
 
-  <!-- FEATURES -->
-  <section class="center features"><h2>What We’re Working On</h2><ul><li><span class="arrow">→</span><strong>Autonomous Computer Control</strong> — agents that click, type & navigate real software</li><li><span class="arrow">→</span><strong>Task‑oriented Intelligence</strong> — multi‑step workflows end‑to‑end, no hand‑holding</li><li><span class="arrow">→</span><strong>User‑aligned Systems</strong> — humans express intent; agents deliver outcomes</li><li><span class="arrow">→</span><strong>Open‑source Research</strong> — benchmarks & datasets for the Data · Users · Task community</li></ul></section>
+  <section id="dut-content">
+    <h2>About DUT Labs</h2>
+    <div class="dut-flow" aria-label="Data → AI → Task flow">
+      <div class="step"><span class="bubble">Data</span><span>Source</span></div>
+      <svg class="arrow-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M16 6l4 6-4 6"/></svg>
+      <div class="step"><span class="bubble">AI</span><span>Reason</span></div>
+      <svg class="arrow-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M16 6l4 6-4 6"/></svg>
+      <div class="step"><span class="bubble">Task</span><span>Action</span></div>
+    </div>
+    <p>DUT Labs is pioneering AI agents that interact with real software—transforming data into user intent and automated tasks.</p>
+    <ul>
+      <li><strong>Autonomous Control</strong>: Click, type, and navigate any app programmatically.</li>
+      <li><strong>Task‑Oriented Intelligence</strong>: Execute end‑to‑end workflows with no manual steps.</li>
+      <li><strong>Privacy‑First</strong>: All processing runs on your device; your data never leaves.</li>
+      <li><strong>Open Source</strong>: Join our community—contribute agents, datasets, and benchmarks.</li>
+    </ul>
+    <p>Backed by real‑world deployments—from trading bots to 3D training platforms—DUT Labs builds AI tools that keep you in flow.</p>
+  </section>
 
-  <!-- EXPERIENCE -->
-  <section class="center experience"><h2>Backed by Experience</h2><p>We’ve shipped production AI at scale—from autonomous brokerage bots to 3‑D learning platforms. Now we’re laser‑focused on building agents that run <em>everyday software</em> so humans can stay in flow.</p></section>
+  <footer>
+    © 2025 DUT Labs • Built in San Francisco
+  </footer>
 
-  <!-- JOIN -->
-  <section class="center join" id="join"><h2>Join Us on GitHub</h2><p>Engineers, researchers, product minds—contribute, fork, or star our work and help push AI agents forward.</p><a href="https://github.com/DUT-Labs" class="btn primary" target="_blank" rel="noopener">Visit github.com/DUT‑Labs</a></section>
-
-  <!-- FOOTER -->
-  <footer class="center">DUT Labs © 2025 • Built with intent in San Francisco</footer>
-
-  <!-- AI Cursor Script -->
-  <script>(function(){const ring=document.createElement('div');ring.className='ai-cursor';document.body.append(ring);let mouseX=window.innerWidth/2,mouseY=window.innerHeight/2,ringX=mouseX,ringY=mouseY;const lerp=(a,b,n)=>a+(b-a)*n;window.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;});window.addEventListener('click',e=>{const ripple=document.createElement('div');ripple.className='ai-click';ripple.style.left=e.clientX+'px';ripple.style.top=e.clientY+'px';document.body.append(ripple);setTimeout(()=>ripple.remove(),500);});function animate(){ringX=lerp(ringX,mouseX,0.15);ringY=lerp(ringY,mouseY,0.15);ring.style.transform=`translate3d(${ringX}px,${ringY}px,0)`;requestAnimationFrame(animate);}animate();})();</script>
+  <script>
+    const dutLink = document.getElementById('dut-link');
+    const dutContent = document.getElementById('dut-content');
+    dutLink.addEventListener('click', e => {
+      e.preventDefault();
+      const visible = dutContent.style.display === 'block';
+      dutContent.style.display = visible ? 'none' : 'block';
+      dutLink.textContent = visible ? 'What is DUT?' : 'Hide Info';
+    });
+  </script>
 </body>
 </html>
